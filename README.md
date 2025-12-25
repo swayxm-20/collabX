@@ -77,11 +77,6 @@ This MVP is designed to be **small, stable, easy to run locally**, and perfect f
 ![Connection Status](docs/screenshots/connection-status.png)
 *Editor showing connection status indicator (green dot = connected) and document information*
 
-> **💡 Tip:** To add your screenshots:
-> 1. Save your screenshot images in the `docs/screenshots/` directory
-> 2. Name them: `main-editor.png`, `realtime-collab.png`, `connection-status.png`
-> 3. The images will automatically appear in the README when pushed to GitHub
-
 ### Live Demo
 
 To see CollabX in action:
