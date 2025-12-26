@@ -100,7 +100,7 @@ The current MVP focuses on zone creation and independent editing. Future enhance
 ### Core Capabilities
 
 - 🔄 **Real-time Synchronization** - See edits from other users instantly
-- 📴 **Offline Support** - Continue editing without internet, syncs when reconnected
+- 🔴 **Offline Support** - Continue editing without internet, syncs when reconnected
 - 🔀 **Conflict-Free Merging** - CRDTs ensure all clients converge to the same state
 - 🚀 **Fast & Lightweight** - Minimal dependencies, optimized for performance
 - 🎨 **Clean UI** - Simple, intuitive interface focused on collaboration
@@ -120,16 +120,25 @@ The current MVP focuses on zone creation and independent editing. Future enhance
 ### Screenshots
 
 #### Main Editor Interface
-![Main Editor](docs/screenshots/main-editor.png)
-*The main collaborative editor interface showing the connected state, document ID control, and text editor with "HI, i am swayam" content*
+<div align="center">
+<img src="docs/screenshots/main-editor.png" alt="Main Editor Interface" width="800"/>
 
-#### Real-time Collaboration
-![Real-time Collaboration](docs/screenshots/realtime-collab.png)
-*Multiple browser tabs editing the same document simultaneously - changes appear in real-time across all connected clients*
+*The main collaborative editor interface showing the connected state, document ID control, and real-time text editing*
+</div>
 
-#### Connection Status
-![Connection Status](docs/screenshots/connection-status.png)
-*Editor showing connection status indicator (green dot = connected) and document information*
+#### Parallel Thought Zones - Connected State
+<div align="center">
+<img src="docs/screenshots/zones-connected.png" alt="Thought Zones Connected" width="800"/>
+
+*Connected state showing the main document and a Parallel Thought Zone on the right sidebar with independent content*
+</div>
+
+#### Parallel Thought Zones - Disconnected State
+<div align="center">
+<img src="docs/screenshots/zones-disconnected.png" alt="Thought Zones Disconnected" width="800"/>
+
+*Disconnected state demonstrating offline editing - edits continue to work locally and will sync when reconnected*
+</div>
 
 ### Live Demo
 
@@ -148,6 +157,25 @@ To see CollabX in action:
    ```
 
 3. **Open multiple browser tabs** at `http://localhost:3000` and start typing!
+
+### Testing Features
+
+**Real-time Collaboration:**
+- Open two browser tabs side by side
+- Type in one tab and watch it appear instantly in the other
+- Edits are synchronized in real-time with zero conflicts
+
+**Offline Support:**
+- Stop the backend server (Ctrl+C)
+- Continue typing in the editor - edits are stored locally
+- Restart the backend - all edits sync automatically
+
+**Parallel Thought Zones:**
+- Select any text in the main document
+- Click "Create Thought Zone" button
+- The selected text appears in a new independent zone in the sidebar
+- Edit both the main document and zones simultaneously
+- Open another tab - all zones sync in real-time across clients
 
 ## 🚀 Quick Start
 
@@ -203,14 +231,14 @@ The frontend will be available at `http://localhost:3000`
 4. Try **disconnecting** one tab (stop the backend) and typing - edits are stored locally
 5. **Reconnect** - the state converges correctly when the backend is restarted
 
-## 🏗️ Architecture
+## �️ Architecture
 
 ### High-Level Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────┐
+┌──────────────────────────────────────────────────────────────┐
 │                        CollabX Architecture                  │
-└─────────────────────────────────────────────────────────────┘
+└──────────────────────────────────────────────────────────────┘
 
 ┌─────────────┐         ┌─────────────┐         ┌─────────────┐
 │   Client 1  │         │   Client 2  │         │   Client 3  │
@@ -308,6 +336,9 @@ collabX/
 │
 ├── docs/
 │   └── screenshots/         # Screenshot directory
+│       ├── main-editor.png
+│       ├── zones-connected.png
+│       └── zones-disconnected.png
 │
 └── README.md                # This file
 ```
@@ -426,7 +457,7 @@ This is a minimal MVP project. Contributions are welcome! Here's how you can hel
 - 🧪 Test coverage
 - 🔒 Security improvements
 
-## 📝 License
+## 📄 License
 
 This is an MVP/demo project. Use as needed for learning and interviews.
 
