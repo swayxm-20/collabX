@@ -39,9 +39,61 @@ CollabX is a **minimal but correct** real-time collaborative web application tha
 - ✅ **Offline-tolerant design** using CRDTs (Yjs)
 - ✅ **Clean frontend–backend separation**
 - ✅ **Zero-conflict editing** - automatic merge of simultaneous edits
+- ✅ **Parallel Thought Zones** - Fork text into independent parallel versions
 - ✅ **Production-ready architecture** - suitable for interviews and demos
 
 This MVP is designed to be **small, stable, easy to run locally**, and perfect for live demonstrations.
+
+## 🧠 Parallel Thought Zones (PTZ)
+
+### What are Parallel Thought Zones?
+
+**Parallel Thought Zones** allow you to select a section of text and fork it into multiple independent, parallel editable versions. Unlike Google Docs-style editing where changes overwrite each other, Thought Zones let multiple versions evolve simultaneously without conflict.
+
+### How It Works
+
+1. **Select Text** - Highlight any section in the main document
+2. **Create Zone** - Click "Create Thought Zone" to fork the selection
+3. **Independent Editing** - The selected text is removed from the main document and becomes the initial content of a new zone
+4. **Parallel Evolution** - Each zone can be edited independently by multiple users
+5. **Real-time Sync** - All zones sync in real-time using CRDTs, just like the main document
+
+### Why CRDTs Make This Possible
+
+**CRDTs (Conflict-free Replicated Data Types)** are the key technology that enables Parallel Thought Zones:
+
+- **Each zone is a Y.Text CRDT** - Independent conflict-free data structure
+- **Automatic Merging** - Multiple users can edit the same zone concurrently without conflicts
+- **Single Update Stream** - All zones sync through the same Y.Doc, no separate connections needed
+- **Offline Support** - Edits work offline and merge correctly on reconnection
+
+### How It Differs from Google Docs
+
+| Feature | Google Docs | CollabX PTZ |
+|---------|-------------|-------------|
+| **Editing Model** | Single shared document | Main document + parallel zones |
+| **Conflict Resolution** | Last-write-wins or manual merge | Automatic CRDT merging |
+| **Parallel Versions** | Not supported | Each zone evolves independently |
+| **Forking** | Copy/paste manually | One-click zone creation |
+| **Real-time Sync** | Yes | Yes (per zone) |
+
+### Use Cases
+
+- **Brainstorming** - Explore multiple ideas in parallel
+- **A/B Testing** - Compare different versions of text
+- **Collaborative Writing** - Let team members explore different directions
+- **Version Exploration** - Keep multiple parallel versions without losing any
+
+### Future Improvements
+
+The current MVP focuses on zone creation and independent editing. Future enhancements could include:
+
+- **Merge Strategies** - UI to merge zones back into main document
+- **Diff Visualization** - Visual comparison between zones
+- **AI-Assisted Merging** - AI suggestions for combining zone content
+- **Zone Relationships** - Link related zones together
+- **Zone Templates** - Pre-defined zone structures
+- **Export Zones** - Export individual zones as separate documents
 
 ## ✨ Features
 
@@ -53,6 +105,7 @@ This MVP is designed to be **small, stable, easy to run locally**, and perfect f
 - 🚀 **Fast & Lightweight** - Minimal dependencies, optimized for performance
 - 🎨 **Clean UI** - Simple, intuitive interface focused on collaboration
 - 🔌 **Auto-Reconnect** - Automatic reconnection with exponential backoff
+- 🧠 **Parallel Thought Zones (PTZ)** - Fork text sections into independent parallel editable versions
 
 ### Technical Highlights
 
@@ -60,6 +113,7 @@ This MVP is designed to be **small, stable, easy to run locally**, and perfect f
 - **Binary Protocol** - Efficient CRDT updates via binary WebSocket messages
 - **Type-Safe** - Full TypeScript implementation
 - **Well-Documented** - Comprehensive code comments and architecture docs
+- **CRDT-Based Zones** - Each Thought Zone is a Y.Text CRDT that syncs independently
 
 ## 🎬 Demo
 
@@ -245,8 +299,10 @@ collabX/
 │       ├── main.tsx         # React entry point
 │       ├── App.tsx          # Main app component
 │       ├── App.css          # App styles
-│       ├── Editor.tsx       # Collaborative editor component
+│       ├── Editor.tsx       # Collaborative editor component (with PTZ)
 │       ├── Editor.css       # Editor styles
+│       ├── ZoneSidebar.tsx # Parallel Thought Zones sidebar
+│       ├── ZoneSidebar.css # Zone sidebar styles
 │       ├── socket.ts        # WebSocket client
 │       └── index.css        # Global styles
 │
@@ -270,11 +326,15 @@ collabX/
 ### CRDT Implementation
 
 - **Library:** [Yjs](https://github.com/yjs/yjs) (`yjs` npm package)
-- **Data Type:** `Y.Text` for text content
+- **Data Types:** 
+  - `Y.Text` for main document content
+  - `Y.Map<zoneId, Y.Text>` for Parallel Thought Zones
+  - Each zone is an independent `Y.Text` CRDT
 - **Update Encoding:** 
   - `Y.encodeStateAsUpdate()` - Encode document state
   - `Y.applyUpdate()` - Apply remote updates
 - **Conflict Resolution:** Automatic via CRDT properties (commutativity, associativity)
+- **Zone Sync:** All zones sync through the same Y.Doc update stream
 
 ### Offline Tolerance
 

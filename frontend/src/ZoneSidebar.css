@@ -1,0 +1,109 @@
+.zone-sidebar {
+  width: 300px;
+  background-color: #f8f9fa;
+  border-left: 1px solid #e9ecef;
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+.zone-sidebar-header {
+  padding: 15px;
+  background-color: white;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.zone-sidebar-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.zone-sidebar-empty {
+  padding: 30px 15px;
+  text-align: center;
+  color: #666;
+}
+
+.zone-sidebar-empty .hint {
+  font-size: 0.85rem;
+  margin-top: 10px;
+  color: #999;
+}
+
+.zone-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.zone-item {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  transition: border-color 0.2s;
+}
+
+.zone-item:hover {
+  border-color: #4a90e2;
+}
+
+.zone-item.active {
+  border-color: #4a90e2;
+  box-shadow: 0 2px 4px rgba(74, 144, 226, 0.1);
+}
+
+.zone-header {
+  padding: 12px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.zone-item.active .zone-header {
+  background-color: #e3f2fd;
+}
+
+.zone-title {
+  font-weight: 500;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.zone-active-badge {
+  background-color: #4a90e2;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.zone-textarea {
+  width: 100%;
+  min-height: 150px;
+  padding: 12px;
+  border: none;
+  outline: none;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  resize: vertical;
+  background-color: white;
+  color: #333;
+}
+
+.zone-preview {
+  padding: 12px;
+  font-size: 0.85rem;
+  color: #666;
+  font-style: italic;
+  max-height: 100px;
+  overflow: hidden;
+}
+
